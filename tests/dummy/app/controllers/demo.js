@@ -6,7 +6,7 @@ export default class DemoController extends Controller {
   @tracked value = '';
 
   @action restore(text) {
-    this.value = text;
+    this.value = text || '';
   }
 
   @action onInput(e) {

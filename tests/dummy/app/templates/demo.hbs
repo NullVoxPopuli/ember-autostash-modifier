@@ -14,6 +14,7 @@
         id="demo-input"
         class="uk-input"
         value={{this.value}}
+        placeholder='Type something here'
         {{on 'input' this.onInput}}
         {{autostash this.value when=@model.id restore=this.restore}}
       >

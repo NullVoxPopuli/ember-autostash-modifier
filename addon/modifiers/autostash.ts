@@ -4,7 +4,7 @@ interface Args {
   positional: [string];
   named: {
     when: string;
-    restore: (data: string) => void;
+    restore: (data?: null | string) => void;
   };
 }
 
@@ -29,9 +29,7 @@ export default class Autostash extends Modifier<Args> {
 
     let stored = lookup(when);
 
-    if (stored) {
-      restore(stored);
-    }
+    restore(stored);
 
     this.lastWhen = this.args.named.when;
   }
