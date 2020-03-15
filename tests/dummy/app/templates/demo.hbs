@@ -1,0 +1,35 @@
+<div class="
+  uk-card uk-card-default uk-card-hover
+  uk-card-large
+">
+  <div class='uk-card-header'>
+    <CodeBlock
+      @code='ember install ember-autostash-modifier'
+    />
+  </div>
+  <div class='uk-card-body'>
+    <label class="uk-form-label" for="demo-input">Type Here, and then change routes</label>
+      <input
+        type="text"
+        id="demo-input"
+        class="uk-input"
+        value={{this.value}}
+        {{on 'input' this.onInput}}
+        {{autostash this.value when=@model.id restore=this.restore}}
+      >
+
+    <p>
+      Routes:
+      <LinkTo @route='demo' @model={{1}}>One: /1</LinkTo>,
+      <LinkTo @route='demo' @model={{2}}>Two: /2</LinkTo>,
+      <LinkTo @route='demo' @model={{3}}>Three: /3</LinkTo>
+    </p>
+  </div>
+
+  <div class='uk-card-footer'>
+    <CodeBlock
+      @code="&lt;input &#123;&#123;autostash this.value when=@model.id restore=this.restore&#125;&#125;&gt;"
+      @language="handlebars"
+    />
+  </div>
+</div>
