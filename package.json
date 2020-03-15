@@ -14,6 +14,7 @@
   },
   "scripts": {
     "build": "ember build --environment=production",
+    "build:docs": "yarn build && mv dist docs",
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
     "start": "ember serve",
