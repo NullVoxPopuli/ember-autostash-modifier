@@ -28,9 +28,19 @@
   </div>
 
   <div class='uk-card-footer'>
-    <CodeBlock
-      @code="&lt;input &#123;&#123;autostash this.value when=@model.id restore=this.restore&#125;&#125;&gt;"
-      @language="handlebars"
-    />
+
+    {{#let (get-code-snippet "demo-input.hbs") as |snippet|}}
+      <CodeBlock
+        @code={{snippet.source}}
+        @language="handlebars"
+      />
+    {{/let}}
+
+    {{#let (get-code-snippet "demo-input-component.js") as |snippet|}}
+      <CodeBlock
+        @code={{snippet.source}}
+        @language="javascript"
+      />
+    {{/let}}
   </div>
 </div>

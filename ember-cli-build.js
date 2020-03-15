@@ -5,12 +5,14 @@ const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 module.exports = function(defaults) {
   let app = new EmberAddon(defaults, {
     // Add options here
+    snippetPaths: ['tests/dummy/app/snippets'],
 
     'ember-prism': {
-      theme: 'tomorrow',
+      theme: 'okaidia',
       components: [
         'markup-templating',
-        'handlebars'
+        'handlebars',
+        'javascript',
       ],
       plugins: ['normalize-whitespace', 'remove-initial-line-feed']
     }
