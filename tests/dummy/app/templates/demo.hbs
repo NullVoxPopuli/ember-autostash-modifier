@@ -16,7 +16,7 @@
         value={{this.value}}
         placeholder='Type something here'
         {{on 'input' this.onInput}}
-        {{autostash this.value when=@model.id restore=this.restore}}
+        {{autostash @model.id}}
       >
 
     <p>
