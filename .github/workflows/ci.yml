@@ -1,13 +1,58 @@
 name: deploy
 
+name: CI
+
+# Inspiration:
+# https://github.com/alexdiliberto/ember-transformicons/blob/master/.github/workflows/ci.yml
 on:
+  pull_request:
   push:
+    # filtering branches here prevents duplicate builds from pull_request and push
     branches:
       - master
 
+env:
+  CI: true
+
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: rwjblue/setup-volta@v1
+    - name: Install
+      run: yarn install
+    - name: ESLint
+      run: yarn lint:js
+    - name: Templates
+      run: yarn lint:hbs
+    - name: Types
+      run: yarn tsc --noEmit
+
+  tests_ember_compat:
+    name: Ember Compatability
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        scenario:
+        - "ember-3.14"
+        - "ember-3.16"
+        - "ember-release"
+        - "ember-beta"
+        - "ember-canary"
+    steps:
+    - uses: actions/checkout@v1
+    - uses: rwjblue/setup-volta@v1
+    - name: Install
+      run: yarn install
+    - name: Test with ${{ matrix.scenario }}
+      run: yarn test:try-one ${{ matrix.scenario }}
+
   publish:
     runs-on: ubuntu-latest
+    needs: [tests_ember_compat]
+    if: (branch = master OR tag IS present) AND type = push
     steps:
       - uses: actions/checkout@v1
       - uses: rwjblue/setup-volta@v1
