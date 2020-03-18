@@ -3,7 +3,7 @@ import { action } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
 import { inject as service } from '@ember/service';
 
-type AutostashStore =  import('autostash/services/autostash/store');
+type AutostashStore = import('ember-autostash-modifier/services/autostash/store').default;
 
 type StashableElement =
   | HTMLInputElement

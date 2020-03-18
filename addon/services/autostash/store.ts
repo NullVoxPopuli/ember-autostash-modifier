@@ -1,13 +1,13 @@
 import Service from '@ember/service';
 
 type Dict = {
-  [key: string]: string;
+  [key: string]: string | boolean;
 };
 
 export default class AutostashStore extends Service {
   stash: Dict = {};
 
-  record(key: string, value: string) {
+  record(key: string, value: string | boolean) {
     this.stash[key] = value;
   }
 
