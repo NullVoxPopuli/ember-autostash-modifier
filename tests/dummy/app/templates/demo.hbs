@@ -8,17 +8,23 @@
     />
   </div>
   <div class='uk-card-body'>
-    <label class="uk-form-label" for="demo-input">Type Here, and then change routes</label>
+      <label class="uk-form-label" for="demo-input">Type Here, and then change routes</label>
       <input
         type="text"
         id="demo-input"
         class="uk-input"
-        value={{this.value}}
         placeholder='Type something here'
-        {{on 'input' this.onInput}}
-        {{autostash this.value when=@model.id restore=this.restore}}
+        {{autostash @model.id}}
       >
+      <br><br>
 
+      <label class='uk-form-label' for='demo-checkbox'>Check the box</label>
+      <input type="checkbox" id='demo-checkbox' class="uk-checkbox" {{autostash @model.id}}>
+
+      <br><br>
+
+      <label class='uk-form-label' for='demo-textarea'>Type some text</label>
+      <textarea id='demo-textarea' class='uk-textarea' {{autostash @model.id}} />
     <p>
       Routes:
       <LinkTo @route='demo' @model={{1}}>One: /1</LinkTo>,
@@ -33,13 +39,6 @@
       <CodeBlock
         @code={{snippet.source}}
         @language="handlebars"
-      />
-    {{/let}}
-
-    {{#let (get-code-snippet "demo-input-component.js") as |snippet|}}
-      <CodeBlock
-        @code={{snippet.source}}
-        @language="javascript"
       />
     {{/let}}
   </div>

@@ -1,48 +1,83 @@
 import Modifier from 'ember-modifier';
+import { action } from '@ember/object';
+import { guidFor } from '@ember/object/internals';
+import { inject as service } from '@ember/service';
+
+type AutostashStore = import('ember-autostash-modifier/services/autostash/store').default;
+
+type StashableElement =
+  | HTMLInputElement
+  | HTMLTextAreaElement;
+
+type Key = string | number;
+type GetValue = () => string | boolean;
+type SetValue = (value: string | boolean) => void;
 
 interface Args {
-  positional: [string];
-  named: {
-    when: string;
-    restore: (data?: null | string) => void;
-  };
+  positional: [Key],
+  named: {};
 }
-
-const LS_KEY = '__AutoStash__';
 
 export default class Autostash extends Modifier<Args> {
-  lastWhen?: string;
+  @service('autostash/store') store!: AutostashStore;
+
+  lastKey?: string;
+  lastValue?: string | boolean;
+
+  getValue: GetValue = () => (this.element as StashableElement).value;
+  setValue: SetValue = (value: string) => (this.element as StashableElement).value = value;
 
   didInstall() {
-    this.lastWhen = this.args.named.when;
+    this.lastKey = keyFor(this.args.positional[0], this.element);
+
+    this.element?.addEventListener('input', this.didReceiveArguments)
+
+    if (isCheckbox(this.element)) {
+      this.getValue = () => (this.element as HTMLInputElement).checked;
+      this.setValue = (value: boolean) => (this.element as HTMLInputElement).checked = value;
+    }
   }
 
+  @action
   didReceiveArguments() {
-    if (!this.lastWhen) return;
+    if (!this.lastKey) return;
+    if (!this.element) return;
+    if (this.lastValue === this.getValue()) return;
 
-    let data = this.args.positional[0];
-    let { when, restore } = this.args.named;
+    let key = keyFor(this.args.positional[0], this.element);
 
-    if (when === this.lastWhen) {
-      return set(when, data);
+    if (key === this.lastKey) {
+      this.record(key);
+      return;
     }
 
-    let stored = lookup(when);
+    this.restore(key);
+  }
 
-    restore(stored);
+  willRemove() {
+    this.element?.removeEventListener('input', this.didReceiveArguments);
+  }
 
-    this.lastWhen = this.args.named.when;
+  record(key: string) {
+    let data = this.getValue();
+
+    this.store.record(key, data);
+  }
+
+  restore(key: string) {
+    this.setValue(this.store.lookup(key) || '');
+
+    this.lastKey = key;
+    this.element?.dispatchEvent(new Event('input', { bubbles: true, cancelable: true }));
   }
 }
 
-function set(key: string, value: string) {
-  let lsKey = `${LS_KEY}${key}`;
-
-  window.localStorage.setItem(lsKey, value);
+function keyFor(key: string | number, element?: Element | null) {
+  return `__${guidFor(key)}-${guidFor(element)}__`;
 }
 
-function lookup(key: string) {
-  let lsKey = `${LS_KEY}${key}`;
+function isCheckbox(element?: Element | null): element is HTMLInputElement {
+  if (!element) return false;
 
-  return window.localStorage.getItem(lsKey);
+  return element.getAttribute('type') === 'checkbox';
 }
