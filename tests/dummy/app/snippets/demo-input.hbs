@@ -1,7 +1,4 @@
-<input
-  type="text"
-  value={{this.value}}
-  {{on 'input' this.onInput}}
-  {{autostash @model.id}}
->
+<input type="text" {{autostash @model.id}}>
+<input type="checkbox" {{autostash @model.id}}>
+<textarea {{autostash @model.id}} />
 
