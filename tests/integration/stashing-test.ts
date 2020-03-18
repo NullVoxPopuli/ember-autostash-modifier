@@ -3,6 +3,8 @@ import { setupRenderingTest } from 'ember-qunit';
 import { render, fillIn, find, settled, click } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 
+import 'qunit-dom'; // types
+
 module('{{autostash}}', function(hooks) {
   setupRenderingTest(hooks);
 
