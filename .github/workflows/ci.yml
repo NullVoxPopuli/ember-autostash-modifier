@@ -35,7 +35,7 @@ jobs:
       matrix:
         scenario:
         - "ember-3.14"
-        - "ember-3.16"
+        - "ember-lts-3.16"
         - "ember-release"
         - "ember-beta"
         - "ember-canary"
