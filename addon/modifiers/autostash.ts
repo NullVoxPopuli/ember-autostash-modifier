@@ -1,7 +1,8 @@
 import Modifier from 'ember-modifier';
 import { action } from '@ember/object';
-import { guidFor } from '@ember/object/internals';
 import { inject as service } from '@ember/service';
+
+import { keyFor, isCheckbox } from 'ember-autostash-modifier/-private/utils';
 
 type AutostashStore = import('ember-autostash-modifier/services/autostash/store').default;
 
@@ -70,14 +71,4 @@ export default class Autostash extends Modifier<Args> {
     this.lastKey = key;
     this.element?.dispatchEvent(new Event('input', { bubbles: true, cancelable: true }));
   }
-}
-
-function keyFor(key: string | number, element?: Element | null) {
-  return `__${guidFor(key)}-${guidFor(element)}__`;
-}
-
-function isCheckbox(element?: Element | null): element is HTMLInputElement {
-  if (!element) return false;
-
-  return element.getAttribute('type') === 'checkbox';
 }

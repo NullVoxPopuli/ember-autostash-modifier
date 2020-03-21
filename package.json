@@ -17,12 +17,12 @@
     "build:docs": "yarn build && mv dist docs",
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
+    "prepublishOnly": "ember ts:precompile",
+    "postpublish": "ember ts:clean",
     "start": "ember serve",
     "test": "ember test",
-    "test:try-one": "ember try:one",
     "test:all": "ember try:each",
-    "prepublishOnly": "ember ts:precompile",
-    "postpublish": "ember ts:clean"
+    "test:try-one": "ember try:one"
   },
   "dependencies": {
     "ember-cli-babel": "^7.17.2",
@@ -67,16 +67,36 @@
     "eslint-plugin-node": "^11.0.0",
     "loader.js": "^4.7.0",
     "qunit-dom": "^1.0.0",
+    "release-it": "^13.1.1",
+    "release-it-lerna-changelog": "^2.1.0",
     "sass": "^1.26.3",
     "typescript": "3.7.5"
   },
   "engines": {
     "node": "10.* || >= 12"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "ember": {
     "edition": "octane"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
+  },
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
   }
 }
