@@ -1,6 +1,8 @@
 import { guidFor } from '@ember/object/internals';
 
-type Serializable =
+export type Key = string | number;
+
+export type Serializable =
   | undefined
   | null
   | string
@@ -31,4 +33,8 @@ export  function lookupFromLocalStorage(key: string) {
   }
 
   return undefined;
+}
+
+export function recordInlocalStorage(key: string, value: Serializable) {
+  localStorage.setItem(key, JSON.stringify({ value }));
 }

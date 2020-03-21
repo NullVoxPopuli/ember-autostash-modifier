@@ -37,7 +37,7 @@ module('{{autostash}}', function(hooks) {
 
       this.setProperties({ key: 1 });
 
-      await render(hbs`<input data-test-input {{autostash this.key}}>`);
+      await render(hbs`<input data-test-input {{autostash this.key persist=true}}>`);
 
       let input = find('[data-test-input') as HTMLInputElement;
 
