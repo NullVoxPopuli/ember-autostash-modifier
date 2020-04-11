@@ -1,31 +1,39 @@
 import Modifier from 'ember-modifier';
 import { action } from '@ember/object';
-import { guidFor } from '@ember/object/internals';
 import { inject as service } from '@ember/service';
 
+import { keyFor, isCheckbox } from 'ember-autostash-modifier/-private/utils';
+
 type AutostashStore = import('ember-autostash-modifier/services/autostash/store').default;
+type Key = import('ember-autostash-modifier/-private/utils').Key;
+type Serializable = import('ember-autostash-modifier/-private/utils').Serializable;
 
 type StashableElement =
   | HTMLInputElement
   | HTMLTextAreaElement;
 
-type Key = string | number;
-type GetValue = () => string | boolean;
-type SetValue = (value: string | boolean) => void;
+type GetValue = () => Serializable;
+type SetValue = (value: Serializable) => void;
 
 interface Args {
   positional: [Key],
-  named: {};
+  named: {
+    persist?: boolean;
+  };
 }
 
 export default class Autostash extends Modifier<Args> {
   @service('autostash/store') store!: AutostashStore;
 
   lastKey?: string;
-  lastValue?: string | boolean;
+  lastValue?: Serializable;
 
   getValue: GetValue = () => (this.element as StashableElement).value;
   setValue: SetValue = (value: string) => (this.element as StashableElement).value = value;
+
+  get persist() {
+    return this.args.named.persist;
+  }
 
   didInstall() {
     this.lastKey = keyFor(this.args.positional[0], this.element);
@@ -61,23 +69,13 @@ export default class Autostash extends Modifier<Args> {
   record(key: string) {
     let data = this.getValue();
 
-    this.store.record(key, data);
+    this.store.record(key, data, { persist: this.persist });
   }
 
   restore(key: string) {
-    this.setValue(this.store.lookup(key) || '');
+    this.setValue(this.store.lookup(key, { didPersist: this.persist }) || '');
 
     this.lastKey = key;
     this.element?.dispatchEvent(new Event('input', { bubbles: true, cancelable: true }));
   }
-}
-
-function keyFor(key: string | number, element?: Element | null) {
-  return `__${guidFor(key)}-${guidFor(element)}__`;
-}
-
-function isCheckbox(element?: Element | null): element is HTMLInputElement {
-  if (!element) return false;
-
-  return element.getAttribute('type') === 'checkbox';
 }
