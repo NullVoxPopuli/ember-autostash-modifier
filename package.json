@@ -68,6 +68,7 @@
     "loader.js": "^4.7.0",
     "qunit-dom": "^1.0.0",
     "sass": "^1.26.3",
+    "semantic-release": "^17.0.4",
     "typescript": "3.7.5"
   },
   "engines": {
