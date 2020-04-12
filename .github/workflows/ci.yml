@@ -27,6 +27,9 @@ jobs:
       run: yarn lint:hbs
     - name: Types
       run: yarn tsc --noEmit
+    - uses: wagoid/commitlint-github-action@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_PAT }}
 
   tests_ember_compat:
     name: Ember Compatability
