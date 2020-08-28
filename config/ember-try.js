@@ -38,6 +38,17 @@ module.exports = async function() {
           }
         }
       },
+      {
+        name: 'ember-release-embroider',
+        npm: {
+          devDependencies: {
+            'ember-source': await getChannelURL('release'),
+            '@embroider/core': '*',
+            '@embroider/webpack': '*',
+            '@embroider/compat': '*',
+          }
+        }
+      },
       // The default `.travis.yml` runs this scenario via `yarn test`,
       // not via `ember try`. It's still included here so that running
       // `ember try:each` manually or from a customized CI config will run it
