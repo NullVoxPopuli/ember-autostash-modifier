@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "@ember/optional-features": "2.0.0",
-    "@glimmer/component": "1.0.1",
+    "@glimmer/component": "1.0.2",
     "@glimmer/tracking": "1.0.1",
     "@types/ember": "3.16.0",
     "@types/ember-qunit": "3.4.9",
