@@ -59,6 +59,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: volta-cli/action@v1
+      - name: Install
+        run: yarn install
       # -
       #   name: Build
       #   run: |
