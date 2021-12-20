@@ -1,20 +1,20 @@
-import Modifier from 'ember-modifier';
 import { action } from '@ember/object';
 import { guidFor } from '@ember/object/internals';
 import { inject as service } from '@ember/service';
 
-type AutostashStore = import('ember-autostash-modifier/services/autostash/store').default;
+import Modifier from 'ember-modifier';
 
-type StashableElement =
-  | HTMLInputElement
-  | HTMLTextAreaElement;
+import type AutostashStore from 'ember-autostash-modifier/services/autostash/store';
+
+type StashableElement = HTMLInputElement | HTMLTextAreaElement;
 
 type Key = string | number;
 type GetValue = () => string | boolean;
 type SetValue = (value: string | boolean) => void;
 
 interface Args {
-  positional: [Key],
+  positional: [Key];
+  // eslint-disable-next-line @typescript-eslint/ban-types
   named: {};
 }
 
@@ -25,16 +25,16 @@ export default class Autostash extends Modifier<Args> {
   lastValue?: string | boolean;
 
   getValue: GetValue = () => (this.element as StashableElement).value;
-  setValue: SetValue = (value: string) => (this.element as StashableElement).value = value;
+  setValue: SetValue = (value: string) => ((this.element as StashableElement).value = value);
 
   didInstall() {
     this.lastKey = keyFor(this.args.positional[0], this.element);
 
-    this.element?.addEventListener('input', this.didReceiveArguments)
+    this.element?.addEventListener('input', this.didReceiveArguments);
 
     if (isCheckbox(this.element)) {
       this.getValue = () => (this.element as HTMLInputElement).checked;
-      this.setValue = (value: boolean) => (this.element as HTMLInputElement).checked = value;
+      this.setValue = (value: boolean) => ((this.element as HTMLInputElement).checked = value);
     }
   }
 
@@ -48,6 +48,7 @@ export default class Autostash extends Modifier<Args> {
 
     if (key === this.lastKey) {
       this.record(key);
+
       return;
     }
 

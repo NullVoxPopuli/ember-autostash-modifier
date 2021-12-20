@@ -1,15 +1,15 @@
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
-import { render, fillIn, find, settled, click } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
-
 import 'qunit-dom'; // types
 
-module('{{autostash}}', function(hooks) {
+import { click, fillIn, find, render, settled } from '@ember/test-helpers';
+import { hbs } from 'ember-cli-htmlbars';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+
+module('{{autostash}}', function (hooks) {
   setupRenderingTest(hooks);
 
-  module('<input {{autostash this.key}}>', function() {
-    test('it works', async function(assert) {
+  module('<input {{autostash this.key}}>', function () {
+    test('it works', async function (assert) {
       this.setProperties({ key: 1 });
 
       await render(hbs`<input data-test-input {{autostash this.key}}>`);
@@ -18,22 +18,22 @@ module('{{autostash}}', function(hooks) {
 
       let input = find('[data-test-input]') as HTMLInputElement;
 
-      assert.equal(input.value, 'one');
+      assert.strictEqual(input.value, 'one');
 
       this.setProperties({ key: 2 });
       await settled();
 
-      assert.equal(input.value, '');
+      assert.strictEqual(input.value, '');
 
       this.setProperties({ key: 1 });
       await settled();
 
-      assert.equal(input.value, 'one');
+      assert.strictEqual(input.value, 'one');
     });
   });
 
-  module('<textarea  {{autostash this.key}}>', function() {
-    test('it works', async function(assert) {
+  module('<textarea  {{autostash this.key}}>', function () {
+    test('it works', async function (assert) {
       this.setProperties({ key: 1 });
 
       await render(hbs`
@@ -44,22 +44,22 @@ module('{{autostash}}', function(hooks) {
 
       let input = find('[data-test-input]') as HTMLInputElement;
 
-      assert.equal(input.value, 'one');
+      assert.strictEqual(input.value, 'one');
 
       this.setProperties({ key: 2 });
       await settled();
 
-      assert.equal(input.value, '');
+      assert.strictEqual(input.value, '');
 
       this.setProperties({ key: 1 });
       await settled();
 
-      assert.equal(input.value, 'one');
+      assert.strictEqual(input.value, 'one');
     });
   });
 
-  module('<input type="checkbox {{autostash this.key}}>', function() {
-    test('it works', async function(assert) {
+  module('<input type="checkbox {{autostash this.key}}>', function () {
+    test('it works', async function (assert) {
       this.setProperties({ key: 1 });
 
       await render(hbs`
