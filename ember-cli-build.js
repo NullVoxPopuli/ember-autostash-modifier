@@ -2,7 +2,7 @@
 
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
-module.exports = function(defaults) {
+module.exports = function (defaults) {
   let app = new EmberAddon(defaults, {
     hinting: false,
 
@@ -11,14 +11,9 @@ module.exports = function(defaults) {
 
     'ember-prism': {
       theme: 'okaidia',
-      components: [
-        'markup-templating',
-        'handlebars',
-        'javascript',
-      ],
-      plugins: ['normalize-whitespace', 'remove-initial-line-feed']
-    }
-
+      components: ['markup-templating', 'handlebars', 'javascript'],
+      plugins: ['normalize-whitespace', 'remove-initial-line-feed'],
+    },
   });
 
   /*
@@ -28,18 +23,19 @@ module.exports = function(defaults) {
     behave. You most likely want to be modifying `./index.js` or app's build file
   */
 
-
   // ember-try optionally adds the embroider dependencies
   if ('@embroider/webpack' in app.dependencies()) {
     // eslint-disable-next-line node/no-missing-require
-    return require('@embroider/compat')
-      // eslint-disable-next-line node/no-missing-require
-      .compatBuild(app, require('@embroider/webpack').Webpack, {
-        staticAddonTestSupportTrees: true,
-        staticAddonTrees: true,
-        staticHelpers: true,
-        staticComponents: true,
-      });
+    return (
+      require('@embroider/compat')
+        // eslint-disable-next-line node/no-missing-require
+        .compatBuild(app, require('@embroider/webpack').Webpack, {
+          staticAddonTestSupportTrees: true,
+          staticAddonTrees: true,
+          staticHelpers: true,
+          staticComponents: true,
+        })
+    );
   }
 
   return app.toTree();
