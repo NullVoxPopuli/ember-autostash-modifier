@@ -42,7 +42,8 @@ jobs:
         - "ember-release"
         - "ember-beta"
         - "ember-canary"
-        - "ember-release-embroider"
+        - "embroider-safe"
+        - "embroider-optimized"
     steps:
     - uses: actions/checkout@v2
     - uses: volta-cli/action@v1

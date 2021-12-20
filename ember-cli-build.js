@@ -16,27 +16,17 @@ module.exports = function (defaults) {
     },
   });
 
-  /*
-    This build file specifies the options for the dummy test app of this
-    addon, located in `/tests/dummy`
-    This build file does *not* influence how the addon or the app using it
-    behave. You most likely want to be modifying `./index.js` or app's build file
-  */
+  const { maybeEmbroider } = require('@embroider/test-setup');
 
-  // ember-try optionally adds the embroider dependencies
-  if ('@embroider/webpack' in app.dependencies()) {
-    // eslint-disable-next-line node/no-missing-require
-    return (
-      require('@embroider/compat')
-        // eslint-disable-next-line node/no-missing-require
-        .compatBuild(app, require('@embroider/webpack').Webpack, {
-          staticAddonTestSupportTrees: true,
-          staticAddonTrees: true,
-          staticHelpers: true,
-          staticComponents: true,
-        })
-    );
-  }
-
-  return app.toTree();
+  return maybeEmbroider(app, {
+    staticAddonTestSupportTrees: true,
+    staticAddonTrees: true,
+    staticHelpers: true,
+    staticComponents: true,
+    skipBabel: [
+      {
+        package: 'qunit',
+      },
+    ],
+  });
 };
