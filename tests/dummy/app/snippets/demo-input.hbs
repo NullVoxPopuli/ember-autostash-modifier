@@ -1,4 +1,13 @@
-<input type="text" {{autostash @model.id}}>
-<input type="checkbox" {{autostash @model.id}}>
-<textarea {{autostash @model.id}} />
+<label>
+  @model.id
+  <input type="text" {{autostash @model.id}}>
+</label>
+<label>
+  @model.id
+  <input type="checkbox" {{autostash @model.id}}>
+</label>
+<label>
+  @model.id (textarea)
+  <textarea {{autostash @model.id}} />
+</label>
 
