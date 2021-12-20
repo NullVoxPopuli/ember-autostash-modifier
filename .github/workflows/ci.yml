@@ -59,12 +59,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: volta-cli/action@v1
-      -
-        name: Build
-        run: |
-          yarn
-          yarn ember build --environment=production
-          cp dist/index.html dist/404.html
+      # -
+      #   name: Build
+      #   run: |
+      #     yarn
+      #     yarn ember build --environment=production
+      #     cp dist/index.html dist/404.html
       # -
       #   name: Deploy
       #   uses: JamesIves/github-pages-deploy-action@releases/v3
