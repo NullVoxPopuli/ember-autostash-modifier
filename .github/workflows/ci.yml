@@ -17,7 +17,7 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 0
     - uses: volta-cli/action@v1
@@ -45,7 +45,7 @@ jobs:
         - "embroider-safe"
         - "embroider-optimized"
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: volta-cli/action@v1
     - name: Install
       run: yarn install
@@ -57,7 +57,7 @@ jobs:
     needs: [tests_ember_compat]
     if: github.ref == 'refs/heads/master'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: volta-cli/action@v1
       - name: Install
         run: yarn install
