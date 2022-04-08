@@ -7616,6 +7616,20 @@ eslint-plugin-ember@10.5.9:
     requireindex "^1.2.0"
     snake-case "^3.0.3"
 
+eslint-plugin-ember@10.6.0:
+  version "10.6.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-ember/-/eslint-plugin-ember-10.6.0.tgz#cf02e651300d67ddafef01616f33c07cebb09dd7"
+  integrity sha512-HrI/6jIHcqOfFHP0PRDdvvIZkJhBUxf7V+GUFizMG7EHyqXd/VR7BJSdgXbo1DwvDvCefO5Kz0YMZvh5fnNLOQ==
+  dependencies:
+    "@ember-data/rfc395-data" "^0.0.4"
+    css-tree "^2.0.4"
+    ember-rfc176-data "^0.3.15"
+    eslint-utils "^3.0.0"
+    estraverse "^5.2.0"
+    lodash.kebabcase "^4.1.1"
+    requireindex "^1.2.0"
+    snake-case "^3.0.3"
+
 eslint-plugin-es@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-es/-/eslint-plugin-es-3.0.1.tgz#75a7cdfdccddc0589934aeeb384175f221c57893"
