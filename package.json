@@ -81,7 +81,7 @@
     "qunit-dom": "2.0.0",
     "semantic-release": "19.0.2",
     "typescript": "4.6.4",
-    "webpack": "5.72.0"
+    "webpack": "5.72.1"
   },
   "engines": {
     "node": "14.* || >= 16"
