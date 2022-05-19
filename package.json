@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@ember/optional-features": "2.0.0",
-    "@ember/test-helpers": "2.7.0",
+    "@ember/test-helpers": "2.8.1",
     "@ember/test-waiters": "3.0.2",
     "@embroider/compat": "1.6.0",
     "@embroider/test-setup": "1.6.0",
