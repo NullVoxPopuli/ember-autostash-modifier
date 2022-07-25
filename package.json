@@ -46,7 +46,7 @@
     "@nullvoxpopuli/eslint-configs": "2.2.4",
     "@types/ember": "4.0.0",
     "@types/ember-qunit": "5.0.0",
-    "@types/ember__test-helpers": "2.6.1",
+    "@types/ember__test-helpers": "2.8.0",
     "@types/qunit": "2.11.3",
     "@types/rsvp": "4.0.4",
     "@typescript-eslint/eslint-plugin": "5.30.7",
