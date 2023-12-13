@@ -44,7 +44,7 @@
     "@glimmer/component": "1.1.2",
     "@glimmer/tracking": "1.1.2",
     "@nullvoxpopuli/eslint-configs": "2.2.48",
-    "@types/ember": "4.0.0",
+    "@types/ember": "4.0.10",
     "@types/ember-qunit": "5.0.0",
     "@types/ember__test-helpers": "2.8.0",
     "@types/qunit": "2.11.3",
