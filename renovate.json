@@ -1,9 +1,5 @@
 {
   "extends": [
-    "config:base",
-    ":semanticCommits"
-  ],
-  "automerge": true,
-  "schedule": ["after 11pm on sunday"],  
-  "masterIssue": true
+    "github>NullVoxPopuli/renovate:npm.json5"
+  ]
 }
